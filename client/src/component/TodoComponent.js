@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from "../assests/images/heading.svg";
 import line from "../assests/images/Line.svg";
 
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
 import { Button } from '@mui/material';
 import TodoList from './TodoList';
+import { getTodo } from '../_services/Todo/getTodo.service';
 function TodoComponent() {
+    const [todoList, setTodoList] = useState([])
+    useEffect(function () {
+        getTodo().then(function (response) {
+            console.debug("todoList", response)
+        }).catch(function (error) {
+        });
+    },
+        [])
     return (
         <div className='container'>
             <div className='container-fluid text-center'>
