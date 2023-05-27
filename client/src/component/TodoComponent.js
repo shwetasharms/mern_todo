@@ -1,22 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import logo from "../assests/images/heading.svg";
 import line from "../assests/images/Line.svg";
-
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import { Button } from '@mui/material';
 import TodoList from './TodoList';
 import { getTodo } from '../_services/Todo/getTodo.service';
+import { addTodo } from '../_services/Todo';
 function TodoComponent() {
     const [todoList, setTodoList] = useState([])
+    const [newTodo, setNewTodo] = useState("")
     useEffect(function () {
         getTodo().then(function (response) {
-            console.debug("todoList", response)
+            setTodoList(response.data.data)
         }).catch(function (error) {
         });
-    },
-        [])
+    }, [])
+    function onChangeHandler(e) {
+        if (e.target.name === "newTodo") {
+            setNewTodo(e.target.value)
+        }
+    }
+    function onSubmitHandler() {
+        // let formData = new FormData();
+        // if (newTodo) {
+        //     formData.append("title", newTodo)
+        // }
+        // if (newTodo) {
+        //     formData.append("description", RTCSessionDescription)
+        const data = {
+            title: newTodo,
+            description: ""
+        };
+        // }
+        addTodo(data).then(function (response) {
+            setTodoList([...todoList, response.data])
+            // setTodoList(response.data.data)
+        }).catch(function (error) {
+        });
+    }
     return (
         <div className='container'>
             <div className='container-fluid text-center'>
@@ -24,24 +47,26 @@ function TodoComponent() {
                 <Paper
                     component="form"
                     sx={{ display: 'flex', width: 500 }}
-                    className="mx-auto mt-5"
-                >
+                    className="mx-auto mt-5">
                     <InputBase
                         sx={{ ml: 2, flex: 1 }}
                         placeholder="Enter something..."
                         inputProps={{ 'aria-label': 'Enter something...' }}
-                    />
+                        name="newTodo"
+                        onChange={onChangeHandler} />
                     <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                    <Button sx={{ p: '7px' }} aria-label="directions" className='btnBg text-white text-capitalize fst-italic fw-bold px-3'>
+                    <Button sx={{ p: '7px' }} aria-label="directions" className='btnBg text-white text-capitalize fst-italic fw-bold px-3' onClick={onSubmitHandler}>
                         Add Task
                     </Button>
                 </Paper>
                 <img src={line} className='w-50 my-3' />
-                <TodoList />
+                <div className='vh-66 overflow-auto'>
+                    {todoList.map((list) =>
+                        <TodoList data={list} />
+                    )}
+                </div>
             </div>
-
         </div>
     )
 }
-
 export default TodoComponent

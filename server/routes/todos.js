@@ -9,10 +9,10 @@ const { getTodo, addTodo, viewTodo, updateTodo, deleteTodo } = require("../contr
 
 //Mapping Create
 router.get("/todo", getTodo);
-// router.post("/todo", addTodo);
-// router.get("/todo/", viewTodo);
-// router.put("/todo/", updateTodo);
-// router.delete("/todo/", deleteTodo);
+router.post("/todo", addTodo);
+router.get("/todo/:id", viewTodo);
+router.put("/todo/", updateTodo);
+router.delete("/todo/:id", deleteTodo);
 
 //export
 module.exports = router;

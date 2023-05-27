@@ -10,9 +10,10 @@
 
 //require express for create server
 const express = require("express");
+const cors = require('cors');
 const app = express();
 
-
+app.use(cors());
 require("dotenv").config();
 // define the port on which server run
 const PORT = process.env.PORT || 3000;

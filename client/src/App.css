@@ -9,3 +9,11 @@ body {
 .btnBg {
   background-color: #4F4F4F !important;
 }
+
+.vh-66 {
+  height: 66vh;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

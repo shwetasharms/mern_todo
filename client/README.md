@@ -5,6 +5,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+### `Feature that will implemented in future`
+Infinite Scrolling
+Search Implement
+Filter take reference from the task mobile app 
+apply debouncing on search reference i will apply it on survey
 
 ### `npm start`
 
