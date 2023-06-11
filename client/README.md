@@ -10,7 +10,18 @@ Infinite Scrolling
 Search Implement
 Filter take reference from the task mobile app 
 apply debouncing on search reference i will apply it on survey
+Download tak in excel
 
+
+## Deploye this project on heroku
+### Step-1 npm run build
+### Step-2 add static file to nodeJs, copy build folder  from client and paste it to server folder
+### step-3 go to server>index.js  
+write
+const path  =require("path");
+app.use(express.static(path.join(_dirname,"build")));
+app.get("/")
+### step-4 configure mongoDB 
 ### `npm start`
 
 Runs the app in the development mode.\

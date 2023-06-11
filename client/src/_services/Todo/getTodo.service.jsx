@@ -2,8 +2,7 @@ import axios from "axios";
 import { todoApi } from '../../_constants/api.constant'
 export async function getTodo() {
     const response = await axios.get(
-        // todoApi.LIST,
-        "http://localhost:4000/api/v1/todo"
+        todoApi.LIST,
     ).then(function (response) {
         console.log(response);
         return response;

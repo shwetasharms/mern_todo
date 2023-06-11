@@ -21,22 +21,21 @@ function TodoComponent() {
         if (e.target.name === "newTodo") {
             setNewTodo(e.target.value)
         }
+        if(e.key==="Enter"){
+            onSubmitHandler()
+        }
+        
     }
     function onSubmitHandler() {
-        // let formData = new FormData();
-        // if (newTodo) {
-        //     formData.append("title", newTodo)
-        // }
-        // if (newTodo) {
-        //     formData.append("description", RTCSessionDescription)
         const data = {
             title: newTodo,
             description: ""
         };
-        // }
         addTodo(data).then(function (response) {
-            setTodoList([...todoList, response.data])
-            // setTodoList(response.data.data)
+            setNewTodo("")
+            setTodoList([...todoList, response.data.post])
+            console.debug("response",response)
+          
         }).catch(function (error) {
         });
     }
@@ -53,7 +52,11 @@ function TodoComponent() {
                         placeholder="Enter something..."
                         inputProps={{ 'aria-label': 'Enter something...' }}
                         name="newTodo"
-                        onChange={onChangeHandler} />
+                        value={newTodo}
+                        onChange={onChangeHandler}
+                        onKeyDown={onChangeHandler}
+
+                         />
                     <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
                     <Button sx={{ p: '7px' }} aria-label="directions" className='btnBg text-white text-capitalize fst-italic fw-bold px-3' onClick={onSubmitHandler}>
                         Add Task
